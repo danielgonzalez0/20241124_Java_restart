@@ -1,6 +1,9 @@
 package com.myclass;
 
 public class Planete {
+    public static String form = "sphérique";
+    public static int nbPlanetesDecouvertes = 0;
+
     public String name;
     public String matter;
     public long diameter;
@@ -8,7 +11,24 @@ public class Planete {
     public Atmosphere atmosphere;
     public Spaceship stockedShip = null;
 
+    //constructeurs par défaut
+    public Planete(String name) {
+        this.name = name;
+        this.nbPlanetesDecouvertes++;
+    }
+
     //méthodes
+
+    //static
+
+    public static String expansion(double distance) {
+        if (distance < 14) return "Oh la la mais c'est super rapide";
+        return "Je rêve ou c'est plus rapide que la lumiere";
+    }
+
+
+    //d'instances
+
     public int revolution(int angle) {
         System.out.printf("Je suis la planète %S et je tourne autour de mon étoile\n", this.name);
         int result = angle / 360;

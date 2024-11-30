@@ -62,49 +62,41 @@ public class HelloUniverse {
 
     public static void main(String... args) {
         // chap4 tp3 Instanciation des planètes
-        Planete mercure = new Planete();
-        mercure.name = "Mercure";
+        Planete mercure = new Planete("Mercure");
         mercure.diameter = 4880;
         mercure.matter = "tellurique";
 
-        Planete venus = new Planete();
-        venus.name = "Vénus";
+        Planete venus = new Planete("Vénus");
         venus.diameter = 12104;
         venus.matter = "tellurique";
 
-        Planete terre = new Planete();
-        terre.name = "Terre";
+        Planete terre = new Planete("Terre");
         terre.diameter = 12756;
         terre.matter = "tellurique";
 
-        Planete mars = new Planete();
-        mars.name = "Mars";
+        Planete mars = new Planete("Mars");
         mars.diameter = 6792;
         mars.matter = "tellurique";
 
-        Planete jupiter = new Planete();
-        jupiter.name = "Jupiter";
+        Planete jupiter = new Planete("Jupiter");
         jupiter.diameter = 142984;
         jupiter.matter = "gazeuse";
 
-        Planete saturne = new Planete();
-        saturne.name = "Saturne";
+        Planete saturne = new Planete("Saturne");
         saturne.diameter = 120536;
         saturne.matter = "gazeuse";
 
-        Planete uranus = new Planete();
-        uranus.name = "Uranus";
+        Planete uranus = new Planete("Uranus");
         uranus.diameter = 51118;
         uranus.matter = "gazeuse";
 
-        Planete neptune = new Planete();
-        neptune.name = "Neptune";
+        Planete neptune = new Planete("Neptune");
         neptune.diameter = 49528;
         neptune.matter = "gazeuse";
 
 
         //chap4 tp4 => afficher des attr non instanciés
-        Planete sansNom = new Planete();
+        Planete sansNom = new Planete("sans nom");
 
         // Affichage des informations de Jupiter
         System.out.println(jupiter.name + " est une planète " + jupiter.matter +
@@ -151,6 +143,17 @@ public class HelloUniverse {
         mars.welcomeSpaceship(fregateA);
         mars.welcomeSpaceship(croiseurA);
         System.out.println("vaisseau sur mars : " + mars.stockedShip.getShipType());
+
+        //chap 4 tp9 variable de classe ou prop statique
+        System.out.println("la forme d'une planète est " + Planete.form);
+        System.out.println("la forme de Mars est " + mars.form);
+
+        //chap 4 tp10 méthode statique
+        System.out.println(Planete.expansion(10.5));
+        System.out.println(Planete.expansion(14.2));
+
+        //chap 4 tp11 constructeur par défault
+        System.out.println("nb de planètes découvertes: " + Planete.nbPlanetesDecouvertes);
 
     }//end main
 }
