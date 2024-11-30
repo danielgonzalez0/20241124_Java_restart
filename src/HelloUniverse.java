@@ -1,3 +1,5 @@
+import com.myclass.Planete;
+
 public class HelloUniverse {
 
     //tp3 chap 3 structures de contrôles
@@ -55,21 +57,80 @@ public class HelloUniverse {
     }
 
     public static void main (String... args) {
-        message(1599);
-        message(1600);
-        message(1700);
-        message(1800);
-        message(2006);
-        message(2024);
-        message(2025);
+        // chap4 tp3 Instanciation des planètes
+        Planete mercure = new Planete();
+        mercure.name = "Mercure";
+        mercure.diameter = 4880;
+        mercure.matter = "tellurique";
 
-        displayPeriodEqualToANumberOfPlanet(7);
-        displayPeriodEqualToANumberOfPlanet(8);
-        displayPeriodEqualToANumberOfPlanet(9);
-        displayPeriodEqualToANumberOfPlanet(14);
+        Planete venus = new Planete();
+        venus.name = "Vénus";
+        venus.diameter = 12104;
+        venus.matter = "tellurique";
 
-        displayParagraphFor();
+        Planete terre = new Planete();
+        terre.name = "Terre";
+        terre.diameter = 12756;
+        terre.matter = "tellurique";
 
-        displayWhile();
-    }
+        Planete mars = new Planete();
+        mars.name = "Mars";
+        mars.diameter = 6792;
+        mars.matter = "tellurique";
+
+        Planete jupiter = new Planete();
+        jupiter.name = "Jupiter";
+        jupiter.diameter = 142984;
+        jupiter.matter = "gazeuse";
+
+        Planete saturne = new Planete();
+        saturne.name = "Saturne";
+        saturne.diameter = 120536;
+        saturne.matter = "gazeuse";
+
+        Planete uranus = new Planete();
+        uranus.name = "Uranus";
+        uranus.diameter = 51118;
+        uranus.matter = "gazeuse";
+
+        Planete neptune = new Planete();
+        neptune.name = "Neptune";
+        neptune.diameter = 49528;
+        neptune.matter = "gazeuse";
+
+
+        //chap4 tp4 => afficher des attr non instanciés
+        Planete sansNom = new Planete();
+
+        // Affichage des informations de Jupiter
+        System.out.println(jupiter.name + " est une planète " + jupiter.matter +
+                " avec un diamètre de " + jupiter.diameter + " kilomètres.");
+
+        System.out.println(sansNom.name + " est une planète " + sansNom.matter +
+                " avec un diamètre de " + sansNom.diameter + " kilomètres.");
+
+        //chap4 tp5 methodes
+        /*neptune.revolution();
+        mars.rotation();*/
+
+        //chap4 tp6 methodes + arg
+        int neptuneTurn = mercure.revolution(-3542);
+        System.out.printf(" Neptune a effectué %d tours complets autour de son étoile.\n", neptuneTurn);
+        int marsTurn = mars.rotation(-684);
+        System.out.printf("Mars a effectué %d tours complets sur elle-même\n", marsTurn);
+        int venusTurn = venus.revolution(1250);
+        System.out.printf(" Venus a effectué %d tours complets autour de son étoile.\n", venusTurn);
+
+        //chap 4 tp 7 surcharge de méthodes
+        /*
+        * Dans le main , faites accoster sur Mars un convoi de 8 êtres humains, suivi d'une Frégate.
+        * Affichez ensuite le nombre d'être humains finalement comptabilisés sur Mars sous la forme :
+        * Le nombre d'humains ayant déjà séjourné sur Mars est actuellement de 20.
+        * */
+
+        mars.welcomeSpaceship(8);
+        mars.welcomeSpaceship("FREGATE");
+        System.out.println("Le nombre d'humains ayant déjà séjourné sur Mars est actuellement de " + mars.totalVisitors);
+
+    }//end main
 }
