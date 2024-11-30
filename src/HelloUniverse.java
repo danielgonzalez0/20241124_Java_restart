@@ -1,19 +1,23 @@
+import com.myclass.Atmosphere;
 import com.myclass.Planete;
+import com.myclass.Spaceship;
 
 public class HelloUniverse {
 
     //tp3 chap 3 structures de contrôles
-    public static void displayPeriodEqualToANumberOfPlanet (int nbPlanet) {
+    public static void displayPeriodEqualToANumberOfPlanet(int nbPlanet) {
         switch (nbPlanet) {
             case 7 -> System.out.println("On sait qu'au 16ème siècle, seules 7 planètes avaient été découvertes");
-            case 8 -> System.out.println("On sait que le nombre de planètes est passé de 7 à 8 au 17ème siècle, mais il a également été réduit de 9 à 8 en 2006");
-            case 9 -> System.out.println("On sait que le nombre de planètes est passé de 8 à 9 au 18ème siècle et ce jusqu'en 2006, où ce nombre a été réduit à 8");
+            case 8 ->
+                    System.out.println("On sait que le nombre de planètes est passé de 7 à 8 au 17ème siècle, mais il a également été réduit de 9 à 8 en 2006");
+            case 9 ->
+                    System.out.println("On sait que le nombre de planètes est passé de 8 à 9 au 18ème siècle et ce jusqu'en 2006, où ce nombre a été réduit à 8");
             default -> System.out.printf("Le programme ne peut pas fournir de résultat pour %d\n", nbPlanet);
         }
     }
 
     //tp4 chap 3 structures de contrôles
-    public static void displayParagraphFor () {
+    public static void displayParagraphFor() {
         int nb;
         for (nb = 7; nb < 10; nb++) {
             displayPeriodEqualToANumberOfPlanet(nb);
@@ -21,7 +25,7 @@ public class HelloUniverse {
     }
 
     //tp5 chap 3 structures de contrôles
-    public static void displayWhile () {
+    public static void displayWhile() {
         int nb = 7;
         while (nb < 10) {
             displayPeriodEqualToANumberOfPlanet(nb);
@@ -30,33 +34,33 @@ public class HelloUniverse {
     }
 
 
-//tp1 et 2 chap 3 structures de contrôles
+    //tp1 et 2 chap 3 structures de contrôles
     public static int calculNbPlanete(int annee) {
-  if(annee < 1600 || annee > 2024) {
-      return 0;
-  } else if (annee < 1700) {
-      return 7;
-  } else if (annee < 1800) {
-      return 8;
-  } else if (annee < 2006) {
-      return 9;
-  } else {
-      return 8;
-  }
+        if (annee < 1600 || annee > 2024) {
+            return 0;
+        } else if (annee < 1700) {
+            return 7;
+        } else if (annee < 1800) {
+            return 8;
+        } else if (annee < 2006) {
+            return 9;
+        } else {
+            return 8;
+        }
     }
 
     public static void message(int annee) {
         int nbPlanete = calculNbPlanete(annee);
-        if(nbPlanete == 0) {
+        if (nbPlanete == 0) {
             String error = "Le programme ne peut pas fournir de résultat pour l'année %d\n";
             System.out.printf(error, annee);
-        }else {
+        } else {
             String message = "en %d, les planètes du système solaire était au nombre de : %d \n";
             System.out.printf(message, annee, nbPlanete);
         }
     }
 
-    public static void main (String... args) {
+    public static void main(String... args) {
         // chap4 tp3 Instanciation des planètes
         Planete mercure = new Planete();
         mercure.name = "Mercure";
@@ -123,14 +127,30 @@ public class HelloUniverse {
 
         //chap 4 tp 7 surcharge de méthodes
         /*
-        * Dans le main , faites accoster sur Mars un convoi de 8 êtres humains, suivi d'une Frégate.
-        * Affichez ensuite le nombre d'être humains finalement comptabilisés sur Mars sous la forme :
-        * Le nombre d'humains ayant déjà séjourné sur Mars est actuellement de 20.
-        * */
+         * Dans le main , faites accoster sur Mars un convoi de 8 êtres humains, suivi d'une Frégate.
+         * Affichez ensuite le nombre d'être humains finalement comptabilisés sur Mars sous la forme :
+         * Le nombre d'humains ayant déjà séjourné sur Mars est actuellement de 20.
+         * */
+//
+//        mars.welcomeSpaceship(8);
+//        mars.welcomeSpaceship("FREGATE");
+//        System.out.println("Le nombre d'humains ayant déjà séjourné sur Mars est actuellement de " + mars.totalVisitors);
 
-        mars.welcomeSpaceship(8);
-        mars.welcomeSpaceship("FREGATE");
-        System.out.println("Le nombre d'humains ayant déjà séjourné sur Mars est actuellement de " + mars.totalVisitors);
+        //chap4 tp8 attri class sous forme d'objet
+        uranus.atmosphere = new Atmosphere(83, 15, 2.5F, 0, 0, 0);
+        System.out.printf("Uranus est composée :\n" +
+                        "- d'ydrogène à %.1f%%\n" +
+                        "- d'hélium à %.1f%%\n" +
+                        "- de méthane à %.1f%%\n",
+                uranus.atmosphere.getHydrogen(), uranus.atmosphere.getHelium(), uranus.atmosphere.getMethane());
+        //chap 4 tp 8 passer des obj en arg des méthodes
+        //Faites accoster sur Mars une Frégate de 9 passagers puis un Croiseur de 42 passagers.
+        Spaceship fregateA = new Spaceship("FREGATE", 9);
+        Spaceship croiseurA = new Spaceship("croiseur", 42);
+
+        mars.welcomeSpaceship(fregateA);
+        mars.welcomeSpaceship(croiseurA);
+        System.out.println("vaisseau sur mars : " + mars.stockedShip.getShipType());
 
     }//end main
 }
