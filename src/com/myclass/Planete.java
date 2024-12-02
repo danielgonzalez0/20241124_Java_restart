@@ -1,15 +1,12 @@
 package com.myclass;
 
-public class Planete {
+public abstract class Planete {
     public static String form = "sphérique";
     public static int nbPlanetesDecouvertes = 0;
 
     public String name;
-    public String matter;
     public long diameter;
-    public int totalVisitors;
     public Atmosphere atmosphere;
-    public Spaceship stockedShip = null;
 
     //constructeurs par défaut
     public Planete(String name) {
@@ -57,21 +54,21 @@ public class Planete {
 //
 //        this.totalVisitors = this.totalVisitors + newVisitors;
 //    }
-
-    //chap 4 tp 8 passer des obj en arg des méthodes
-    public Spaceship welcomeSpaceship(Spaceship spaceshipIn) {
-
-        Spaceship spaceshipOut = null;
-
-        if (this.stockedShip == null) {
-            System.out.println("Aucun vaisseau ne s'en va");
-        } else {
-            System.out.println(" Un vaisseau de type " + this.stockedShip.getShipType() + " doit s'en aller.");
-            spaceshipOut = this.stockedShip;
-        }
-        this.totalVisitors += spaceshipIn.getNbPassenger();
-        System.out.printf("  Le nombre d'humains ayant déjà séjourné sur %s est actuellement de %d.\n", this.name, this.totalVisitors);
-        this.stockedShip = spaceshipIn;
-        return spaceshipOut;
-    }
+//
+//    //chap 4 tp 8 passer des obj en arg des méthodes
+//    public Spaceship welcomeSpaceship(Spaceship spaceshipIn) {
+//
+//        Spaceship spaceshipOut = null;
+//
+//        if (this.stockedShip == null) {
+//            System.out.println("Aucun vaisseau ne s'en va");
+//        } else {
+//            System.out.println(" Un vaisseau de type " + this.stockedShip.getShipType() + " doit s'en aller.");
+//            spaceshipOut = this.stockedShip;
+//        }
+//        this.totalVisitors += spaceshipIn.getNbPassenger();
+//        System.out.printf("  Le nombre d'humains ayant déjà séjourné sur %s est actuellement de %d.\n", this.name, this.totalVisitors);
+//        this.stockedShip = spaceshipIn;
+//        return spaceshipOut;
+//    }
 }

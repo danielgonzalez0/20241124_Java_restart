@@ -1,6 +1,4 @@
-import com.myclass.Atmosphere;
-import com.myclass.Planete;
-import com.myclass.Spaceship;
+import com.myclass.*;
 
 public class HelloUniverse {
 
@@ -62,48 +60,38 @@ public class HelloUniverse {
 
     public static void main(String... args) {
         // chap4 tp3 Instanciation des planètes
-        Planete mercure = new Planete("Mercure");
+        PlaneteTellurique mercure = new PlaneteTellurique("Mercure");
         mercure.diameter = 4880;
-        mercure.matter = "tellurique";
 
-        Planete venus = new Planete("Vénus");
+        PlaneteTellurique venus = new PlaneteTellurique("Vénus");
         venus.diameter = 12104;
-        venus.matter = "tellurique";
 
-        Planete terre = new Planete("Terre");
+        PlaneteTellurique terre = new PlaneteTellurique("Terre");
         terre.diameter = 12756;
-        terre.matter = "tellurique";
 
-        Planete mars = new Planete("Mars");
+        PlaneteTellurique mars = new PlaneteTellurique("Mars");
         mars.diameter = 6792;
-        mars.matter = "tellurique";
 
-        Planete jupiter = new Planete("Jupiter");
+        PlaneteGazeuse jupiter = new PlaneteGazeuse("Jupiter");
         jupiter.diameter = 142984;
-        jupiter.matter = "gazeuse";
 
-        Planete saturne = new Planete("Saturne");
+        PlaneteGazeuse saturne = new PlaneteGazeuse("Saturne");
         saturne.diameter = 120536;
-        saturne.matter = "gazeuse";
 
-        Planete uranus = new Planete("Uranus");
+        PlaneteGazeuse uranus = new PlaneteGazeuse("Uranus");
         uranus.diameter = 51118;
-        uranus.matter = "gazeuse";
 
-        Planete neptune = new Planete("Neptune");
+        PlaneteGazeuse neptune = new PlaneteGazeuse("Neptune");
         neptune.diameter = 49528;
-        neptune.matter = "gazeuse";
 
 
         //chap4 tp4 => afficher des attr non instanciés
-        Planete sansNom = new Planete("sans nom");
+        PlaneteGazeuse sansNom = new PlaneteGazeuse("sans nom");
 
         // Affichage des informations de Jupiter
         System.out.println(jupiter.name + " est une planète " + jupiter.matter +
                 " avec un diamètre de " + jupiter.diameter + " kilomètres.");
 
-        System.out.println(sansNom.name + " est une planète " + sansNom.matter +
-                " avec un diamètre de " + sansNom.diameter + " kilomètres.");
 
         //chap4 tp5 methodes
         /*neptune.revolution();
@@ -137,8 +125,8 @@ public class HelloUniverse {
                 uranus.atmosphere.getHydrogen(), uranus.atmosphere.getHelium(), uranus.atmosphere.getMethane());
         //chap 4 tp 8 passer des obj en arg des méthodes
         //Faites accoster sur Mars une Frégate de 9 passagers puis un Croiseur de 42 passagers.
-        Spaceship fregateA = new Spaceship("FREGATE", 9);
-        Spaceship croiseurA = new Spaceship("croiseur", 42);
+        WarSpaceship fregateA = new WarSpaceship("FREGATE", 9);
+        WarSpaceship croiseurA = new WarSpaceship("croiseur", 42);
 
         mars.welcomeSpaceship(fregateA);
         mars.welcomeSpaceship(croiseurA);
@@ -154,6 +142,43 @@ public class HelloUniverse {
 
         //chap 4 tp11 constructeur par défault
         System.out.println("nb de planètes découvertes: " + Planete.nbPlanetesDecouvertes);
+
+        //chap 5 tp1 extends
+        Spaceship chasseurA = new WarSpaceship("CHASSEUR", 156, 2);
+
+        Spaceship vaisseauMondeA = new CivilSpaceship("VAISSEAU-MONDE", 4784, 30);
+
+        vaisseauMondeA.activeShield();
+        ((WarSpaceship) chasseurA).attack(vaisseauMondeA, "lasers photoniques", 3);
+        vaisseauMondeA.desactiveShield();
+        System.out.println("le blindage du vaisseau-monde est de " + vaisseauMondeA.getBlindage());
+        System.out.println("son shield peut resister encore " + vaisseauMondeA.getShieldResistance() + " minutes");
+
+        mars.welcomeSpaceship(vaisseauMondeA);
+        mars.welcomeSpaceship(chasseurA);
+
+        System.out.println("----------------------------- chap5 tp final classe abstraite --------------------------------------");
+        WarSpaceship chasseurB = new WarSpaceship("CHASSEUR", 50, 200, 10);
+        int reject = chasseurB.emporterCargaison(20);
+        System.out.println("la quantité refusée du chasseur b est de : " + reject);
+
+        WarSpaceship fregateB = new WarSpaceship("FREGATE", 100);
+        reject = fregateB.emporterCargaison(45);
+        System.out.println("la quantité refusée de la fregate b est de : " + reject);
+        reject = fregateB.emporterCargaison(12);
+        System.out.println("la quantité refusée de la fregate b est de : " + reject);
+
+        WarSpaceship fregateC = new WarSpaceship("FREGATE", 14);
+        reject = fregateC.emporterCargaison(30);
+        System.out.println("la quantité refusée de la fregate c est de : " + reject);
+
+        CivilSpaceship vaisseauMondeB = new CivilSpaceship("VAISSEAU-MONDE");
+        reject = vaisseauMondeB.emporterCargaison(1560);
+        System.out.println("la quantité refusée du baisseau-monde B est de : " + reject);
+        reject = vaisseauMondeB.emporterCargaison(600);
+        System.out.println("la quantité refusée du baisseau-monde B est de : " + reject);
+
+        System.out.println("----------------------------- chap5 tp final classe abstraite --------------------------------------");
 
     }//end main
 }
