@@ -32,8 +32,8 @@ public class WarSpaceship extends Spaceship {
         this.tonnageMax = calculateTonnageMax;
     }
 
-    public WarSpaceship(TypeSpaceShip type, int blindage, int shieldResistance) {
-        super(type, blindage, shieldResistance);
+    public WarSpaceship(TypeSpaceShip type, int blindage, int shieldResistance, int passengers) {
+        super(type, blindage, shieldResistance, passengers);
         this.tonnageMax = calculateTonnageMax;
     }
 
