@@ -1,6 +1,7 @@
 import com.myclass.*;
 import com.myenum.TypeSpaceShip;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class HelloUniverse {
@@ -63,29 +64,55 @@ public class HelloUniverse {
 
     public static void main(String... args) {
         // chap4 tp3 Instanciation des planètes
-        PlaneteTellurique mercure = new PlaneteTellurique("Mercure");
-        mercure.diameter = 4880;
 
-        PlaneteTellurique venus = new PlaneteTellurique("Vénus");
-        venus.diameter = 12104;
 
-        PlaneteTellurique terre = new PlaneteTellurique("Terre");
-        terre.diameter = 12756;
-
-        PlaneteTellurique mars = new PlaneteTellurique("Mars");
-        mars.diameter = 6792;
-
-        PlaneteGazeuse jupiter = new PlaneteGazeuse("Jupiter");
-        jupiter.diameter = 142984;
+        Galaxie systemeSolaire = new Galaxie("systeme solaire");
 
         PlaneteGazeuse saturne = new PlaneteGazeuse("Saturne");
         saturne.diameter = 120536;
+        saturne.distanceEtoile = 1427f;
+        systemeSolaire.planetes.add(saturne);
 
         PlaneteGazeuse uranus = new PlaneteGazeuse("Uranus");
         uranus.diameter = 51118;
+        uranus.distanceEtoile = 2877.38f;
+        systemeSolaire.planetes.add(uranus);
 
         PlaneteGazeuse neptune = new PlaneteGazeuse("Neptune");
         neptune.diameter = 49528;
+        neptune.distanceEtoile = 4497.07f;
+        systemeSolaire.planetes.add(neptune);
+
+        PlaneteTellurique mercure = new PlaneteTellurique("Mercure", 5);
+        mercure.diameter = 4880;
+        mercure.distanceEtoile = 57.9f;
+        systemeSolaire.planetes.add(mercure);
+
+        PlaneteTellurique venus = new PlaneteTellurique("Vénus", 0);
+        venus.diameter = 12104;
+        venus.distanceEtoile = 108.2f;
+        systemeSolaire.planetes.add(venus);
+
+        PlaneteTellurique terre = new PlaneteTellurique("Terre", 100);
+        terre.diameter = 12756;
+        terre.distanceEtoile = 149.6f;
+        systemeSolaire.planetes.add(terre);
+
+        PlaneteTellurique mars = new PlaneteTellurique("Mars", 1);
+        mars.diameter = 6792;
+        mars.distanceEtoile = 227.9f;
+        systemeSolaire.planetes.add(mars);
+
+
+        PlaneteGazeuse jupiter = new PlaneteGazeuse("Jupiter");
+        jupiter.diameter = 142984;
+        jupiter.distanceEtoile = 778.3f;
+        systemeSolaire.planetes.add(jupiter);
+
+        System.out.println("Les planètes du système solaire dans l'ordre de distance avec le soleil sont :");
+        for (Planete planete : systemeSolaire.planetes) {
+            System.out.println(planete.name);
+        }
 
 
 //        //chap4 tp4 => afficher des attr non instanciés
@@ -190,65 +217,79 @@ public class HelloUniverse {
         CivilSpaceship cargoC = new CivilSpaceship(TypeSpaceShip.CARGO, 200, 1000, 100);
         CivilSpaceship vaisseauMondeC = new CivilSpaceship(TypeSpaceShip.VAISSEAU_MONDE, 300, 2000, 500);
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Quel vaisseau souhaitez-vous manipuler: " + TypeSpaceShip.CHASSEUR.name + ", Frégate, Croiseur, Cargo et Vaisseau-Monde");
+//        terre.welcomeSpaceships(cargoC, chasseurC, croiseurC, fregateC);
 
-        String stringType = sc.nextLine();
-        TypeSpaceShip spaceshipType = TypeSpaceShip.fromName(stringType);
+        Atmosphere atmosphereMars = new Atmosphere();
+        atmosphereMars.constituants.put("CO2", 95f);
+        atmosphereMars.constituants.put("N2", 3f);
+        atmosphereMars.constituants.put("AR", 1.5f);
+        System.out.println("l'atmosphere de mars est composé de :");
+        for (Map.Entry<String, Float> gaz : atmosphereMars.constituants.entrySet()) {
+            System.out.println(gaz.getValue() + "% de   " + gaz.getKey());
+        }
 
 
-        Spaceship spaceshipSelected = null;
-        switch (spaceshipType) {
-            case CHASSEUR -> spaceshipSelected = chasseurC;
-            case FREGATE -> spaceshipSelected = fregateC;
-            case CROISEUR -> spaceshipSelected = croiseurC;
-            case CARGO -> spaceshipSelected = cargoC;
-            case VAISSEAU_MONDE -> spaceshipSelected = vaisseauMondeC;
-            default -> {
-                System.out.println("une erreur c'est produite sur le choix du vaisseau");
-                System.exit(1);
+        while (true) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Quel vaisseau souhaitez-vous manipuler: " + TypeSpaceShip.CHASSEUR.name + ", Frégate, Croiseur, Cargo et Vaisseau-Monde");
+
+            String stringType = sc.nextLine();
+            TypeSpaceShip spaceshipType = TypeSpaceShip.fromName(stringType);
+
+            Spaceship spaceshipSelected = null;
+            switch (spaceshipType) {
+                case CHASSEUR -> spaceshipSelected = chasseurC;
+                case FREGATE -> spaceshipSelected = fregateC;
+                case CROISEUR -> spaceshipSelected = croiseurC;
+                case CARGO -> spaceshipSelected = cargoC;
+                case VAISSEAU_MONDE -> spaceshipSelected = vaisseauMondeC;
+                default -> {
+                    System.out.println("une erreur c'est produite sur le choix du vaisseau");
+                    System.exit(1);
+                }
+            }
+
+            System.out.println("sur quelle planete tellurique voulez-vous attérir: mercure (1), venus (2) , terre (3), mars(4)");
+            String planeteIndex = sc.nextLine();
+            Planete planeteChoisi = null;
+
+
+            for (Planete planete : systemeSolaire.planetes) {
+                if (planete.name.equalsIgnoreCase(planeteIndex)) {
+                    planeteChoisi = planete;
+                    break;
+                }
+            }
+
+            if (planeteChoisi instanceof PlaneteGazeuse) {
+                System.out.println("Il ne s'agit pas d'une planète Tellurique !");
+                continue;
+            }
+
+            System.out.println("quel tonnage voulez-vous embarquer");
+            int tonnageChoisi = sc.nextInt();
+
+            ((PlaneteTellurique) planeteChoisi).welcomeSpaceships(spaceshipSelected);
+            System.out.println(spaceshipSelected.getShipType() + " a rejeté : " + spaceshipSelected.emporterCargaison(tonnageChoisi) + " tonnes");
+            sc.nextLine();
+            System.out.println("Voulez-vous continuez? oui/non");
+
+            String res = sc.nextLine();
+            if (res.equals("non")) {
+                System.out.println("A binetot");
+                break;
+            }
+            if (!res.equals("oui") && !res.equals("non")) {
+                System.out.println("une erreur est survenue");
+                break;
             }
         }
 
-        System.out.println("sur quelle planete tellurique voulez-vous attérir: mercure, venus, terre, mars");
-        String planeteName = sc.nextLine();
-        PlaneteTellurique planeteChoisi = null;
-        switch (planeteName) {
-            case "mercure" -> planeteChoisi = mercure;
-            case "venus" -> planeteChoisi = venus;
-            case "terre" -> planeteChoisi = terre;
-            case "mars" -> planeteChoisi = mars;
-            default -> {
-                System.out.println("une erreur c'est produite sur le choix de la planete");
-                System.exit(1);
-            }
-        }
 
-        System.out.println("quel tonnage voulez-vous embarquer");
-        int tonnageChoisi = sc.nextInt();
-
-        planeteChoisi.welcomeSpaceship(spaceshipSelected);
-        System.out.println(spaceshipSelected.getShipType() + " a rejeté : " + spaceshipSelected.emporterCargaison(tonnageChoisi) + " tonnes");
+//        System.out.println("----------------------------- chap6 tp2 class classes conteneur --------------------------------------");
 
 
-        System.out.println("----------------------------- chap6 tp2 class classes conteneur --------------------------------------");
-        Atmosphere atmosphereUranus = new Atmosphere();
-        atmosphereUranus.hydrogen = 83f;
-        atmosphereUranus.helium = 15f;
-        atmosphereUranus.methane = new Float(2.5f);
-        atmosphereUranus.argon = new Float(0);
-
-        if (atmosphereUranus.hydrogen != null)
-            System.out.println(" uranus hydrogen = " + atmosphereUranus.hydrogen + "%");
-        if (atmosphereUranus.methane != null) System.out.println(" uranus methane = " + atmosphereUranus.methane + "%");
-        if (atmosphereUranus.helium != null) System.out.println(" uranus helium = " + atmosphereUranus.helium + "%");
-        if (atmosphereUranus.argon != null) System.out.println(" uranus argon = " + atmosphereUranus.argon + "%");
-        if (atmosphereUranus.carbonDioxide != null)
-            System.out.println(" uranus dioxyde de carbone = " + atmosphereUranus.carbonDioxide + "%");
-        if (atmosphereUranus.sodium != null) System.out.println(" uranus sodium = " + atmosphereUranus.sodium + "%");
-
-
-        System.out.println("----------------------------- chap6 tp3 class un type enum --------------------------------------");
+//        System.out.println("----------------------------- chap6 tp3 class un type enum --------------------------------------");
 
 
     }//end main
