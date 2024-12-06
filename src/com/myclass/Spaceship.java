@@ -1,7 +1,9 @@
 package com.myclass;
 
+import com.myenum.TypeSpaceShip;
+
 public abstract class Spaceship {
-    private String shipType;
+    private TypeSpaceShip shipType;
     private int nbPassenger;
     private int blindage;
     private int shieldResistance;
@@ -11,7 +13,7 @@ public abstract class Spaceship {
     public Spaceship() {
     }
 
-    public Spaceship(String type) {
+    public Spaceship(TypeSpaceShip type) {
         this.shipType = type;
     }
 
@@ -20,18 +22,18 @@ public abstract class Spaceship {
         this.nbPassenger = passengers;
     }
 
-    public Spaceship(String type, int passengers) {
+    public Spaceship(TypeSpaceShip type, int passengers) {
         this.nbPassenger = passengers;
         this.shipType = type;
     }
 
-    public Spaceship(String type, int blindage, int shieldResistance) {
+    public Spaceship(TypeSpaceShip type, int blindage, int shieldResistance) {
         this.shipType = type;
         this.blindage = blindage;
         this.shieldResistance = shieldResistance;
     }
 
-    public Spaceship(String type, int blindage, int shieldResistance, int passengers) {
+    public Spaceship(TypeSpaceShip type, int blindage, int shieldResistance, int passengers) {
         this.nbPassenger = passengers;
         this.shipType = type;
         this.blindage = blindage;
@@ -45,7 +47,7 @@ public abstract class Spaceship {
         return this.nbPassenger;
     }
 
-    public String getShipType() {
+    public TypeSpaceShip getShipType() {
         return this.shipType;
     }
 
@@ -58,7 +60,7 @@ public abstract class Spaceship {
     }
 
     //setter
-    public void setShipType(String type) {
+    public void setShipType(TypeSpaceShip type) {
         this.shipType = type;
     }
 

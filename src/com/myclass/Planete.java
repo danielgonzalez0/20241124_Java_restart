@@ -1,12 +1,15 @@
 package com.myclass;
 
-public abstract class Planete {
+import java.util.Objects;
+
+public abstract class Planete implements Comparable<Object> {
     public static String form = "sphérique";
     public static int nbPlanetesDecouvertes = 0;
 
     public String name;
     public long diameter;
     public Atmosphere atmosphere;
+    public float distanceEtoile;
 
     //constructeurs par défaut
     public Planete(String name) {
@@ -38,7 +41,23 @@ public abstract class Planete {
         return result;
     }
 
-    //chap 4 tp 7 surcharge de méthodes
+    public int compareTo(Object Planete) {
+        Planete planeteToCompare = (Planete) Planete;
+        return ((Float) distanceEtoile).compareTo(planeteToCompare.distanceEtoile);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Planete planete)) return false;
+        return Float.compare(distanceEtoile, planete.distanceEtoile) == 0 && Objects.equals(name, planete.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, distanceEtoile);
+    }
+
+//chap 4 tp 7 surcharge de méthodes
 //    public void welcomeSpaceship (int newVisitors){
 //        this.totalVisitors = this.totalVisitors + newVisitors;
 //    }

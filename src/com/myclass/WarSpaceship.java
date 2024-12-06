@@ -1,12 +1,14 @@
 package com.myclass;
 
+import com.myenum.TypeSpaceShip;
+
 public class WarSpaceship extends Spaceship {
     public boolean isWeaponActivated = true;
 
     private int calculateTonnageMax = switch (this.getShipType()) {
-        case "CHASSEUR" -> 0;
-        case "FREGATE" -> Math.min(this.getNbPassenger() * 2, 50);
-        case "CROISEUR" -> Math.min(this.getNbPassenger() * 2, 100);
+        case CHASSEUR -> 0;
+        case FREGATE -> Math.min(this.getNbPassenger() * 2, 50);
+        case CROISEUR -> Math.min(this.getNbPassenger() * 2, 100);
         default -> 0;
     };
 
@@ -15,7 +17,7 @@ public class WarSpaceship extends Spaceship {
         super();
     }
 
-    public WarSpaceship(String type) {
+    public WarSpaceship(TypeSpaceShip type) {
         super(type);
     }
 
@@ -25,17 +27,12 @@ public class WarSpaceship extends Spaceship {
         this.tonnageMax = calculateTonnageMax;
     }
 
-    public WarSpaceship(String type, int passengers) {
+    public WarSpaceship(TypeSpaceShip type, int passengers) {
         super(type, passengers);
         this.tonnageMax = calculateTonnageMax;
     }
 
-    public WarSpaceship(String type, int blindage, int shieldResistance) {
-        super(type, blindage, shieldResistance);
-        this.tonnageMax = calculateTonnageMax;
-    }
-
-    public WarSpaceship(String type, int blindage, int shieldResistance, int passengers) {
+    public WarSpaceship(TypeSpaceShip type, int blindage, int shieldResistance, int passengers) {
         super(type, blindage, shieldResistance, passengers);
         this.tonnageMax = calculateTonnageMax;
     }
