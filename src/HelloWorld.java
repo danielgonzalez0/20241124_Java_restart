@@ -1,4 +1,4 @@
-import com.myclass.Car;
+import com.espacex.myclass.Car;
 
 public class HelloWorld {
     public static void main(String... args) {
